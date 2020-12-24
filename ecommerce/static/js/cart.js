@@ -7,11 +7,31 @@ for (var i = 0; i < updateBtns.length; i++) {
         console.log('productId: ', productId, 'action: ', action)
 
         console.log('USER:', user)
-        if(user==='AnonymousUser'){
+        if (user === 'AnonymousUser') {
             console.log('Not logged in')
         }
-        else{
-            console.log('User logged in, sending data..')
+        else {
+            updateUserOrder(productId, action)
         }
     })
+}
+
+function updateUserOrder(productId, action) {
+    console.log('User logged in, sending data..')
+
+    var url = '/update_item'
+
+    fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 'productId': productId, 'action': action })
+    })
+
+        .then((response) => {
+            return response.json()
+        })
+
+        .then((data) => {
+            console.log('data: ', data)
+        })
 }
