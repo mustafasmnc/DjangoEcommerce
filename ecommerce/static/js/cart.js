@@ -19,19 +19,19 @@ for (var i = 0; i < updateBtns.length; i++) {
 function updateUserOrder(productId, action) {
     console.log('User logged in, sending data..')
 
-    var url = '/update_item'
+    var url = '/update_item/'
 
     fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken, },
         body: JSON.stringify({ 'productId': productId, 'action': action })
     })
 
-        .then((response) => {
-            return response.json()
-        })
+    .then((response) => {
+        return response.json()
+     })
 
-        .then((data) => {
-            console.log('data: ', data)
-        })
+    .then((data) => {
+        console.log('data: ', data)
+    })
 }
